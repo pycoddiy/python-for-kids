@@ -16,6 +16,7 @@ WINDOW_TITLE = "Starting Template"
 SCREEN_BOTTOM = 50
 GRAVITY = 200
 JUMP_SPEED = 200
+BONUS_ACCELERATIONS = 2
 
 class GameView(arcade.View):
     """
@@ -38,6 +39,7 @@ class GameView(arcade.View):
         self.all_sprites.append(self.player_sprite)
         
         self.key_pressed = None  # Track the currently pressed key
+        self.bonus_acceleration = 0
 
         self.speed = 0  # Vertical velocity
         # If you have sprite lists, you should create them here,
@@ -68,8 +70,13 @@ class GameView(arcade.View):
         need it.
         """
         if self.key_pressed == arcade.key.W or self.key_pressed == arcade.key.UP:
-            self.speed = JUMP_SPEED
-            self.key_pressed = None  # Reset key to avoid continuous jumping
+            if self.player_sprite.center_y <= SCREEN_BOTTOM + self.player_sprite.height // 2 + 5:
+                self.bonus_acceleration = 0  # Reset bonus acceleration when on the ground
+                
+            if self.bonus_acceleration < BONUS_ACCELERATIONS:
+                self.bonus_acceleration += 1
+                self.speed = JUMP_SPEED
+                self.key_pressed = None  # Reset key to avoid continuous jumping
 
         # Update sprite positions
         self.player_sprite.center_y += self.speed * delta_time
