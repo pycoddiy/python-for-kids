@@ -1,9 +1,3 @@
-# This is a recommended template for everyone to start with found at
-# https://api.arcade.academy/en/stable/example_code/starting_template.html
-# Purpose of this exercise is to get students familiar with the structure of a program
-# Encourage students to play with parameters like window size and background color
-# Encourage students to add print statements to see when functions are called
-
 """
 Starting Template
 
@@ -15,10 +9,16 @@ python -m arcade.examples.starting_template
 """
 import arcade
 
-WINDOW_WIDTH = 1280
-WINDOW_HEIGHT = 800
-WINDOW_TITLE = "Obstacle Avoidance"
+WINDOW_WIDTH = 800
+WINDOW_HEIGHT = 600
+WINDOW_TITLE = "Starting Template"
 
+SCREEN_BOTTOM = 50
+GRAVITY = 200
+JUMP_SPEED = 200
+BONUS_ACCELERATIONS = 2
+
+OBSTACLE_TIME_DELTA = 2.0  # Time in seconds between obstacles
 
 class GameView(arcade.View):
     """
@@ -32,10 +32,21 @@ class GameView(arcade.View):
     def __init__(self):
         super().__init__()
 
-        self.background_color = arcade.color.AIR_FORCE_BLUE
+        self.background_color = arcade.color.AMAZON
 
-        # If you have sprite lists, you should create them here,
-        # and set them to None
+        self.player_sprite = arcade.Sprite("./assets/ball.png", scale=0.05)
+        self.player_sprite.center_x = 150 
+        self.player_sprite.center_y = WINDOW_HEIGHT // 2
+        self.all_sprites = arcade.SpriteList()
+        self.all_sprites.append(self.player_sprite)
+        
+        self.key_pressed = None  # Track the currently pressed key
+        self.bonus_acceleration = 0
+
+        self.speed = 0  # Vertical velocity
+
+        self.obstacle_timer = 0.0  # Timer to track obstacle spawning
+        self.obstacle_x_position = WINDOW_WIDTH  # Initial x position for obstacles
 
     def reset(self):
         """Reset the game to the initial state."""
@@ -50,8 +61,9 @@ class GameView(arcade.View):
         # This command should happen before we start drawing. It will clear
         # the screen to the background color, and erase what we drew last frame.
         self.clear()
-
-        # Call draw() on all your sprite lists below
+        arcade.draw_lbwh_rectangle_filled(0, 0, WINDOW_WIDTH, SCREEN_BOTTOM, arcade.color.DARK_BROWN)
+        self.all_sprites.draw()
+        arcade.draw_lbwh_rectangle_filled(self.obstacle_x_position, 0, 50, 50, arcade.color.RED)
 
     def on_update(self, delta_time):
         """
@@ -59,7 +71,28 @@ class GameView(arcade.View):
         Normally, you'll call update() on the sprite lists that
         need it.
         """
-        pass
+        if self.key_pressed == arcade.key.W or self.key_pressed == arcade.key.UP:
+            if self.player_sprite.center_y <= SCREEN_BOTTOM + self.player_sprite.height // 2 + 5:
+                self.bonus_acceleration = 0  # Reset bonus acceleration when on the ground
+                
+            if self.bonus_acceleration < BONUS_ACCELERATIONS:
+                self.bonus_acceleration += 1
+                self.speed = JUMP_SPEED
+                self.key_pressed = None  # Reset key to avoid continuous jumping
+
+        # Update sprite positions
+        self.player_sprite.center_y += self.speed * delta_time
+
+        # Update speed
+        self.speed -= GRAVITY * delta_time
+
+        # Keep the player inside the window borders
+        if self.player_sprite.center_y < SCREEN_BOTTOM + self.player_sprite.height // 2:
+            self.player_sprite.center_y = SCREEN_BOTTOM + self.player_sprite.height // 2
+        if self.player_sprite.center_y > WINDOW_HEIGHT - self.player_sprite.height // 2:
+            self.player_sprite.center_y = WINDOW_HEIGHT - self.player_sprite.height // 2
+
+        
 
     def on_key_press(self, key, key_modifiers):
         """
@@ -68,7 +101,7 @@ class GameView(arcade.View):
         For a full list of keys, see:
         https://api.arcade.academy/en/latest/arcade.key.html
         """
-        pass
+        self.key_pressed = key
 
     def on_key_release(self, key, key_modifiers):
         """
