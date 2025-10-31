@@ -9,8 +9,8 @@ python -m arcade.examples.starting_template
 """
 import arcade
 
-WINDOW_WIDTH = 800
-WINDOW_HEIGHT = 600
+WINDOW_WIDTH = 1280
+WINDOW_HEIGHT = 800
 WINDOW_TITLE = "Starting Template"
 
 SCREEN_BOTTOM = 50
@@ -37,6 +37,15 @@ class GameView(arcade.View):
         self.player_sprite = arcade.Sprite("./assets/ball.png", scale=0.05)
         self.player_sprite.center_x = 150 
         self.player_sprite.center_y = WINDOW_HEIGHT // 2
+
+        self.obstacles = arcade.SpriteList()
+        for i in range(13):
+            s = f"./assets/{i + 1:02d}.png"
+            obstacle = arcade.Sprite(s, scale=0.04)
+            obstacle.center_x = 100 + i * 90
+            obstacle.center_y = SCREEN_BOTTOM + obstacle.height // 2 - 20
+            self.obstacles.append(obstacle)
+
         self.all_sprites = arcade.SpriteList()
         self.all_sprites.append(self.player_sprite)
         
@@ -63,7 +72,7 @@ class GameView(arcade.View):
         self.clear()
         arcade.draw_lbwh_rectangle_filled(0, 0, WINDOW_WIDTH, SCREEN_BOTTOM, arcade.color.DARK_BROWN)
         self.all_sprites.draw()
-        arcade.draw_lbwh_rectangle_filled(self.obstacle_x_position, 0, 50, 50, arcade.color.RED)
+        self.obstacles.draw()
 
     def on_update(self, delta_time):
         """
