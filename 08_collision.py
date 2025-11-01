@@ -16,6 +16,7 @@ WINDOW_TITLE = "Collision Detection - Eat the Food"
 
 CHARACTER_SIZE = 30
 FOOD_SIZE = 20
+INITIAL_FOOD_COUNT = 5
 
 
 class Character:
@@ -148,11 +149,15 @@ class GameView(arcade.View):
         self.food = []
 
         # Generate some initial food squares
-        for _ in range(5):
-            self.food.append(Food())
+        self.spawn_food(INITIAL_FOOD_COUNT)
 
         # If you have sprite lists, you should create them here,
         # and set them to None
+
+    def spawn_food(self, count):
+        """Spawn a specified number of food objects."""
+        for _ in range(count):
+            self.food.append(Food())
 
     def reset(self):
         """Reset the game to the initial state."""
@@ -161,8 +166,7 @@ class GameView(arcade.View):
         
         # Clear existing food and create new food items
         self.food.clear()
-        for _ in range(5):
-            self.food.append(Food())
+        self.spawn_food(INITIAL_FOOD_COUNT)
         
         # Reset character position
         self.character.x = 100
@@ -211,8 +215,7 @@ class GameView(arcade.View):
         # Optionally: spawn new food when all food is eaten
         if len(self.food) == 0:
             # Spawn new food items
-            for _ in range(5):
-                self.food.append(Food())
+            self.spawn_food(INITIAL_FOOD_COUNT)
 
     def on_key_press(self, key, key_modifiers):
         """

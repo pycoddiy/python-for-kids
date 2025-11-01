@@ -16,6 +16,7 @@ WINDOW_TITLE = "Object-Oriented Programming with Classes"
 
 CHARACTER_SIZE = 30
 FOOD_SIZE = 20
+INITIAL_SQUARE_COUNT = 5
 
 
 class Character:
@@ -110,11 +111,15 @@ class GameView(arcade.View):
         self.food = []
 
         # Generate some initial food squares
-        for _ in range(5):
-            self.food.append(Food())
+        self.spawn_squares(INITIAL_SQUARE_COUNT)
 
         # If you have sprite lists, you should create them here,
         # and set them to None
+
+    def spawn_squares(self, count):
+        """Spawn a specified number of square objects."""
+        for _ in range(count):
+            self.food.append(Food())
 
     def reset(self):
         """Reset the game to the initial state."""

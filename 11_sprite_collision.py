@@ -21,6 +21,9 @@ MUSHROOM_SCALING = 0.015   # Make mushrooms smaller
 # Movement speed
 MOVEMENT_SPEED = 5
 
+# Spawning configuration
+INITIAL_MUSHROOM_COUNT = 5  # Number of mushrooms to spawn initially
+
 # Global texture cache - load textures once and reuse them
 TEXTURES = {}
 
@@ -113,7 +116,11 @@ class GameView(arcade.View):
         self.player_list.append(self.player_sprite)
         
         # Create mushroom sprites
-        for _ in range(5):
+        self.spawn_mushrooms(INITIAL_MUSHROOM_COUNT)
+
+    def spawn_mushrooms(self, count):
+        """Spawn a specified number of mushroom sprites."""
+        for _ in range(count):
             mushroom = MushroomSprite()
             self.mushroom_list.append(mushroom)
 
@@ -169,9 +176,7 @@ class GameView(arcade.View):
         
         # Spawn new mushrooms if all are collected
         if len(self.mushroom_list) == 0:
-            for _ in range(5):
-                mushroom = MushroomSprite()
-                self.mushroom_list.append(mushroom)
+            self.spawn_mushrooms(INITIAL_MUSHROOM_COUNT)
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed."""
