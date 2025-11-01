@@ -8,6 +8,7 @@ Slime Animation Demo (based on 06_geometry_awareness)
 import arcade
 import glob
 import os
+from datetime import datetime
 from typing import List
 
 WINDOW_WIDTH = 1280
@@ -277,6 +278,17 @@ class GameView(arcade.View):
             self.up_pressed = True
         elif key in (arcade.key.S, arcade.key.DOWN):
             self.down_pressed = True
+        elif key == arcade.key.P:
+            # Save a screenshot to ./screenshots
+            try:
+                os.makedirs("screenshots", exist_ok=True)
+                image = arcade.get_image()
+                timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+                path = os.path.join("screenshots", f"slime_{timestamp}.png")
+                image.save(path)
+                print(f"Saved screenshot: {path}")
+            except Exception as e:
+                print(f"Failed to save screenshot: {e}")
 
     def on_key_release(self, key, modifiers):
         if key in (arcade.key.A, arcade.key.LEFT):
