@@ -1,0 +1,77 @@
+python-for-kids — Assets Attribution
+====================================
+
+This file lists image assets used by the examples and where they come from.
+If you are the original author of any item, replace “TBD” with your name and the license.
+If an asset was downloaded from a site, fill in the source URL and license.
+
+General note: Screenshots under screenshots/ are generated from this project and do not
+require external attribution.
+
+Legend for “Used by”: script filenames that reference the asset.
+
+---------------------------------------------------------------------
+01.png
+	Used by: 22_obstacle.py, 23_obstacle_spawning.py
+	Author: Freepik contributor(s) — per Freepik page
+	License: Free license with attribution (per Freepik terms)
+
+02.png
+	Used by: 22_obstacle.py, 23_obstacle_spawning.py
+	Author: Freepik contributor(s) — per Freepik page
+	License: Free license with attribution (per Freepik terms)
+
+03.png
+	Used by: 22_obstacle.py, 23_obstacle_spawning.py
+	Author: Freepik contributor(s) — per Freepik page
+	License: Free license with attribution (per Freepik terms)
+
+04.png (stone wall)
+	Used by: 13_maze.py, 14_enemy.py
+	Author: Freepik contributor(s) — per Freepik page
+	License: Free license with attribution (per Freepik terms)
+
+05.png (mushroom/food)
+	Used by: 11_sprite_collision.py, 12_sprites_countdown.py, 13_maze.py, 14_enemy.py
+	Author: Freepik contributor(s) — per Freepik page
+	License: Free license with attribution (per Freepik terms)
+
+06.png (exit)
+	Used by: 13_maze.py, 14_enemy.py
+	Author: Freepik contributor(s) — per Freepik page
+	License: Free license with attribution (per Freepik terms)
+
+07.png
+	Used by: 22_obstacle.py, 23_obstacle_spawning.py
+	Author: Freepik contributor(s) — per Freepik page
+	License: Free license with attribution (per Freepik terms)
+
+08.png
+	Used by: 22_obstacle.py, 23_obstacle_spawning.py
+	Author: Freepik contributor(s) — per Freepik page
+	License: Free license with attribution (per Freepik terms)
+
+09.png
+	Used by: 22_obstacle.py, 23_obstacle_spawning.py
+	Author: Freepik contributor(s) — per Freepik page
+	License: Free license with attribution (per Freepik terms)
+
+10.png
+	Used by: 22_obstacle.py, 23_obstacle_spawning.py
+	Author: Freepik contributor(s) — per Freepik page
+	License: Free license with attribution (per Freepik terms)
+
+11.png
+	Used by: 22_obstacle.py, 23_obstacle_spawning.py
+	Author: Freepik contributor(s) — per Freepik page
+	License: Free license with attribution (per Freepik terms)
+
+12.png
+	Used by: 22_obstacle.py, 23_obstacle_spawning.py
+	Author: Freepik contributor(s) — per Freepik page
+	License: Free license with attribution (per Freepik terms)
+
+13.png
+	Used by: 22_obstacle.py, 23_obstacle_spawning.py
+	Author: Freepik contributor(s) — per Freepik page
+	License: Free license with attribution (per Freepik terms)

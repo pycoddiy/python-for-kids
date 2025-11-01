@@ -52,6 +52,11 @@ Notes:
 pip install "arcade>=3.3.2"
 ```
 
+## Assets & Attribution
+
+- All third-party images are listed in `assets/attribution.txt` with source URLs and licenses where known.
+- If you add or replace images, please update that file. Screenshots in `screenshots/` are generated from this repo and don’t require external attribution.
+
 ### How to capture screenshots
 
 Take screenshots of your projects and share with your parents, friends, and with PyCodDIY! Let us make fun and celebrate together! 
