@@ -35,6 +35,23 @@ python 13_maze.py
 
 Assets are in `assets/`. Make sure you run commands from the repo root so the relative asset paths resolve.
 
+## Testing
+
+This repo includes headless unit tests using pytest. To run them:
+
+```bash
+pip install pytest
+pytest -q
+```
+
+Notes:
+- Tests that depend on Arcade will be skipped automatically if Arcade isn’t installed.
+- To run all tests, install Arcade first:
+
+```bash
+pip install "arcade>=3.3.2"
+```
+
 ### How to capture screenshots
 
 Take screenshots of your projects and share with your parents, friends, and with PyCodDIY! Let us make fun and celebrate together! 
