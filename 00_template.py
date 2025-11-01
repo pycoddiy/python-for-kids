@@ -17,7 +17,7 @@ import arcade
 
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 800
-WINDOW_TITLE = "Obstacle Avoidance"
+WINDOW_TITLE = "Window Title Here"
 
 
 class GameView(arcade.View):

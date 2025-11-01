@@ -11,7 +11,7 @@ import arcade
 
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
-WINDOW_TITLE = "Starting Template"
+WINDOW_TITLE = "Keyboard Control Demo"
 
 key_map = {
     arcade.key.W: "up",

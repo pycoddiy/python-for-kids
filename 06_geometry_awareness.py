@@ -11,9 +11,9 @@ import arcade
 
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
-WINDOW_TITLE = "Starting Template"
+WINDOW_TITLE = "Geometry and Boundary Detection"
 
-BALL_RADIUS = 30
+SQUARE_SIZE = 30
 
 
 class GameView(arcade.View):
@@ -49,7 +49,7 @@ class GameView(arcade.View):
         # This command should happen before we start drawing. It will clear
         # the screen to the background color, and erase what we drew last frame.
         self.clear()
-        arcade.draw_circle_filled(self.x, self.y, BALL_RADIUS, arcade.color.AERO_BLUE)
+        arcade.draw_lbwh_rectangle_filled(self.x, self.y, SQUARE_SIZE, SQUARE_SIZE, arcade.color.AERO_BLUE)
 
         # Call draw() on all your sprite lists below
 
@@ -69,14 +69,14 @@ class GameView(arcade.View):
             self.x += 10
 
         # Keep the player inside the window borders
-        if self.x < BALL_RADIUS:
-            self.x = BALL_RADIUS
-        if self.x > WINDOW_WIDTH - BALL_RADIUS:
-            self.x = WINDOW_WIDTH - BALL_RADIUS
-        if self.y < BALL_RADIUS:
-            self.y = BALL_RADIUS
-        if self.y > WINDOW_HEIGHT - BALL_RADIUS:
-            self.y = WINDOW_HEIGHT - BALL_RADIUS
+        if self.x < 0:
+            self.x = 0
+        if self.x > WINDOW_WIDTH - SQUARE_SIZE:
+            self.x = WINDOW_WIDTH - SQUARE_SIZE
+        if self.y < 0:
+            self.y = 0
+        if self.y > WINDOW_HEIGHT - SQUARE_SIZE:
+            self.y = WINDOW_HEIGHT - SQUARE_SIZE
 
     def on_key_press(self, key, key_modifiers):
         """

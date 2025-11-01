@@ -11,7 +11,7 @@ import arcade
 
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
-WINDOW_TITLE = "Starting Template"
+WINDOW_TITLE = "Key Press and Release Events"
 
 
 class GameView(arcade.View):
@@ -47,7 +47,7 @@ class GameView(arcade.View):
         # This command should happen before we start drawing. It will clear
         # the screen to the background color, and erase what we drew last frame.
         self.clear()
-        arcade.draw_circle_filled(self.x, self.y, 30, arcade.color.AERO_BLUE)
+        arcade.draw_lbwh_rectangle_filled(self.x, self.y, 30, 30, arcade.color.AERO_BLUE)
 
         # Call draw() on all your sprite lists below
 

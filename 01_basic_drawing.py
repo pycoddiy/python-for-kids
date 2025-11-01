@@ -11,7 +11,7 @@ import arcade
 
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
-WINDOW_TITLE = "My Arcade Game"
+WINDOW_TITLE = "Basic Drawing Shapes"
 
 
 class GameView(arcade.View):

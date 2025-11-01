@@ -11,8 +11,8 @@ import arcade
 import random
 
 WINDOW_WIDTH = 1280
-WINDOW_HEIGHT = 800
-WINDOW_TITLE = "Starting Template"
+WINDOW_HEIGHT = 720
+WINDOW_TITLE = "Dynamic Obstacle Spawning"
 
 SCREEN_BOTTOM = 50
 GRAVITY = 200

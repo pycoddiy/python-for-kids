@@ -9,14 +9,16 @@ python -m arcade.examples.starting_template
 """
 import arcade
 
-WINDOW_WIDTH = 800
-WINDOW_HEIGHT = 600
-WINDOW_TITLE = "Starting Template"
+WINDOW_WIDTH = 1280
+WINDOW_HEIGHT = 720
+WINDOW_TITLE = "Obstacle Avoidance Game"
 
 SCREEN_BOTTOM = 50
 GRAVITY = 200
 JUMP_SPEED = 200
 BONUS_ACCELERATIONS = 2
+
+OBSTACLE_TIME_DELTA = 2.0  # Time in seconds between obstacles
 
 class GameView(arcade.View):
     """
@@ -33,8 +35,17 @@ class GameView(arcade.View):
         self.background_color = arcade.color.AMAZON
 
         self.player_sprite = arcade.Sprite("./assets/ball.png", scale=0.05)
-        self.player_sprite.center_x = WINDOW_WIDTH // 2
+        self.player_sprite.center_x = 150 
         self.player_sprite.center_y = WINDOW_HEIGHT // 2
+
+        self.obstacles = arcade.SpriteList()
+        for i in range(13):
+            s = f"./assets/{i + 1:02d}.png"
+            obstacle = arcade.Sprite(s, scale=0.04)
+            obstacle.center_x = 100 + i * 90
+            obstacle.center_y = SCREEN_BOTTOM + obstacle.height // 2 - 20
+            self.obstacles.append(obstacle)
+
         self.all_sprites = arcade.SpriteList()
         self.all_sprites.append(self.player_sprite)
         
@@ -42,8 +53,9 @@ class GameView(arcade.View):
         self.bonus_acceleration = 0
 
         self.speed = 0  # Vertical velocity
-        # If you have sprite lists, you should create them here,
-        # and set them to None
+
+        self.obstacle_timer = 0.0  # Timer to track obstacle spawning
+        self.obstacle_x_position = WINDOW_WIDTH  # Initial x position for obstacles
 
     def reset(self):
         """Reset the game to the initial state."""
@@ -60,8 +72,7 @@ class GameView(arcade.View):
         self.clear()
         arcade.draw_lbwh_rectangle_filled(0, 0, WINDOW_WIDTH, SCREEN_BOTTOM, arcade.color.DARK_BROWN)
         self.all_sprites.draw()
-
-        # Call draw() on all your sprite lists below
+        self.obstacles.draw()
 
     def on_update(self, delta_time):
         """
@@ -89,6 +100,8 @@ class GameView(arcade.View):
             self.player_sprite.center_y = SCREEN_BOTTOM + self.player_sprite.height // 2
         if self.player_sprite.center_y > WINDOW_HEIGHT - self.player_sprite.height // 2:
             self.player_sprite.center_y = WINDOW_HEIGHT - self.player_sprite.height // 2
+
+        
 
     def on_key_press(self, key, key_modifiers):
         """
