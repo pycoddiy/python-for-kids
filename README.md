@@ -1,5 +1,10 @@
 # Python for Kids — Arcade Mini Projects
 
+[![CI](https://github.com/pycoddiy/python-for-kids/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/pycoddiy/python-for-kids/actions/workflows/ci.yml)
+[![Python](https://img.shields.io/badge/python-3.13%2B-blue)](https://www.python.org/downloads/)
+[![Arcade](https://img.shields.io/badge/arcade-%3E%3D%203.3.2-orange)](https://api.arcade.academy/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://makeapullrequest.com)
+
 A collection of small, kid-friendly Python games and demos built with the Arcade library. Each script is self-contained and focuses on a simple concept: movement, animation, basic physics, or a small game loop challenge.
 
 This repo is great for learning by tinkering: open a file, read the constants and comments, run it, then modify values to see what happens.
