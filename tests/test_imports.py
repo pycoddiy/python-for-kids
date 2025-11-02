@@ -13,14 +13,11 @@ from __future__ import annotations
 import importlib.util
 from pathlib import Path
 import unittest
+import importlib
 
 
 ROOT = Path(__file__).resolve().parents[1]
-try:
-    import arcade  # noqa: F401
-    ARCADE_AVAILABLE = True
-except Exception:
-    ARCADE_AVAILABLE = False
+ARCADE_AVAILABLE = importlib.util.find_spec("arcade") is not None
 
 
 def load_module_from_path(path: Path):

@@ -7,17 +7,17 @@ from __future__ import annotations
 import importlib.util
 from pathlib import Path
 import unittest
+import importlib
 import os
+import platform
 
 
 ROOT = Path(__file__).resolve().parents[1]
 MOD_PATH = ROOT / "06_geometry_awareness.py"
-os.environ.setdefault("PYGLET_HEADLESS", "true")
-try:
-    import arcade  # noqa: F401
-    ARCADE_AVAILABLE = True
-except Exception:
-    ARCADE_AVAILABLE = False
+ARCADE_AVAILABLE = importlib.util.find_spec("arcade") is not None
+CI = os.environ.get("CI") == "true"
+IS_LINUX = platform.system() == "Linux"
+WINDOW_TESTS = os.environ.get("WINDOW_TESTS") == "1"
 
 
 def load_module(path: Path):
@@ -29,6 +29,7 @@ def load_module(path: Path):
     return module
 
 
+@unittest.skipIf(CI and not (IS_LINUX and WINDOW_TESTS), "Skip GUI window tests in CI except Linux with Xvfb")
 @unittest.skipUnless(ARCADE_AVAILABLE, "Arcade not installed; skipping 06 geometry tests")
 class TestGeometry06(unittest.TestCase):
     @classmethod

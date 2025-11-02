@@ -27,10 +27,8 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # Install project and dev deps
-          python -m pip install .[dev]
-          # Ensure Arcade is available
-          python -m pip install "arcade>=3.3.2"
+          # Install test tooling and runtime deps without packaging this repo
+          python -m pip install pytest pytest-cov "arcade>=3.3.2"
 
       - name: Install Xvfb (Linux only)
         if: runner.os == 'Linux'
