@@ -29,6 +29,8 @@ MAX_JUMPS = 2  # allow up to double-jump (like in 16_gforce)
 # Sprite sheet paths
 IDLE_SHEET = "assets/Blue Idle - no slime/Blue Idle - no slime.png"
 JUMP_SHEET = "assets/Blue Idle - no slime/Blue Jump - no slime.png"
+TEXTURE_WIDTH = 32
+TEXTURE_HEIGHT = 32
 
 # Animation tuning
 IDLE_FRAME_TIME = 0.12
@@ -63,7 +65,7 @@ def load_strip_spritesheet(path: str, texture_width: int = None, texture_height:
     textures = sprite_sheet.get_texture_grid(
         size=(texture_width, texture_height),
         columns=columns,
-        count=columns
+        count=columns * rows
     )
     
     return textures
@@ -72,8 +74,8 @@ def load_strip_spritesheet(path: str, texture_width: int = None, texture_height:
 class AnimatedCharacter(arcade.Sprite):
     def __init__(self):
         super().__init__()
-        self.idle_textures = load_strip_spritesheet(IDLE_SHEET)
-        self.jump_textures = load_strip_spritesheet(JUMP_SHEET)
+        self.idle_textures = load_strip_spritesheet(IDLE_SHEET, TEXTURE_WIDTH, TEXTURE_HEIGHT)
+        self.jump_textures = load_strip_spritesheet(JUMP_SHEET, TEXTURE_WIDTH, TEXTURE_HEIGHT)
 
         # Start idle
         self.textures = self.idle_textures or []
