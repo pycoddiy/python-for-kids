@@ -36,23 +36,35 @@ JUMP_FRAME_TIME = 0.09
 CHAR_SCALE = 2.0
 
 
-def load_strip_spritesheet(path: str, texture_width: int, texture_height: int) -> List[arcade.Texture]:
+def load_strip_spritesheet(path: str, texture_width: int = None, texture_height: int = None) -> List[arcade.Texture]:
     """Load textures from a horizontal strip sprite sheet of square frames.
 
     Rule: frame_size = image_height, columns = image_width // image_height
+    If texture_width and texture_height are not provided, they are auto-calculated.
     """
+    # Get image dimensions to auto-calculate frame size
     img = Image.open(path)
     width, height = img.size
+    
+    # Auto-calculate frame dimensions if not provided (square frames assumption)
+    if texture_width is None:
+        texture_width = height  # frame_width = image_height for square frames
+    if texture_height is None:
+        texture_height = height  # frame_height = image_height for square frames
+    
     columns = max(1, width // texture_width)
     rows = max(1, height // texture_height)
-    total_textures = columns * rows
-
+    
     # Use arcade.load_spritesheet to get a SpriteSheet object, then slice textures
     # https://api.arcade.academy/en/3.3.2/api/api_docs/api/texture.html#arcade.load_spritesheet
     sprite_sheet = arcade.load_spritesheet(file_name=path)
     
-    # Slice individual textures from the sprite sheet
-    textures = sprite_sheet.get_texture_grid((texture_width, texture_height), columns, total_textures)
+    # Use get_texture_grid to slice the horizontal strip into individual textures
+    textures = sprite_sheet.get_texture_grid(
+        size=(texture_width, texture_height),
+        columns=columns,
+        count=columns
+    )
     
     return textures
 
@@ -60,8 +72,8 @@ def load_strip_spritesheet(path: str, texture_width: int, texture_height: int) -
 class AnimatedCharacter(arcade.Sprite):
     def __init__(self):
         super().__init__()
-        self.idle_textures = load_strip_spritesheet(IDLE_SHEET, 32, 32)
-        self.jump_textures = load_strip_spritesheet(JUMP_SHEET, 32, 32)
+        self.idle_textures = load_strip_spritesheet(IDLE_SHEET)
+        self.jump_textures = load_strip_spritesheet(JUMP_SHEET)
 
         # Start idle
         self.textures = self.idle_textures or []
