@@ -75,3 +75,14 @@ Legend for “Used by”: script filenames that reference the asset.
 	Used by: 22_obstacle.py, 23_obstacle_spawning.py
 	Author: Freepik contributor(s) — per Freepik page
 	License: Free license with attribution (per Freepik terms)
+
+---------------------------------------------------------------------
+Blue Idle / Blue Jump (no slime)
+	Files:
+	  - assets/Blue Idle - no slime/Blue Idle - no slime.png
+	  - assets/Blue Idle - no slime/Blue Jump - no slime.png
+	Used by: 17_gforce_spritesheet.py
+	Author: cactusturtle
+	License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+	License file: assets/Blue Idle - no slime/LICENSE.txt
+	Notes: Attribution required. See included README and https://creativecommons.org/licenses/by/4.0/
